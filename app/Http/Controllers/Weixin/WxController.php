@@ -120,10 +120,10 @@ class WxController extends Controller
         return $arr;
     }
 
+    //自定义菜单
     public function menu(){
 
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->token().'';
-
 
     }
 
