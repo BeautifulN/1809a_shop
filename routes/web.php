@@ -14,3 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/info', function () {
+    phpinfo();
+});
+
+//微信
+Route::get('index', 'Weixin\WxController@index');
+Route::any('index', 'Weixin\WxController@wxEvent');
+Route::get('token', 'Weixin\WxController@token');
+Route::get('text', 'Weixin\WxController@text');
+Route::get('getuser', 'Weixin\WxController@getuser');
+
+
+
