@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Redis;
 
+use GuzzleHttp\Client;
+
 class WxController extends Controller
 {
 
@@ -122,8 +124,44 @@ class WxController extends Controller
 
     //自定义菜单
     public function menu(){
+//        接口
+        $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->token();
 
-        $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->token().'';
+//        菜单数据内容
+        $arr = [
+            'button' => [
+
+                ["type" => "view",
+                    "name" => "百度一下",
+                    "url" => "http://www.baidu.com/"
+                ],
+
+                [
+                "type" => "click",
+                "name" => "点我，嘿嘿嘿",
+                "key" => "key_1"
+                ],
+
+            ]
+
+        ];
+        $str = json_encode($arr,JSON_UNESCAPED_UNICODE);   //处理中文乱码
+        $clinet = new Client();  //发送请求
+        $response = $clinet->request('POST',$url,[
+                'body' => $str
+        ]);
+
+        //处理响应回来
+        $res = $response->getBody();
+
+        $arr = json_decode($res,true);
+
+        //判断错误信息
+        if($arr['errcode']>0){
+            echo "菜单创建失败";
+        }else{
+            echo "菜单创建成功";
+        }
 
     }
 
