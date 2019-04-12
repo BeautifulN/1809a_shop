@@ -34,9 +34,10 @@ class WxController extends Controller
         file_put_contents("logs/wx_event.log",$srt,FILE_APPEND);
 
         $obj = simplexml_load_string($content); //把xml转换成对象
+        print_r($obj);exit;
 //        获取相应的字段 (对象格式)
-        $openid = $obj->FromUserName;  //用户openid
-        $wxid = $obj->ToUserName;   //微信号ID
+        $openid = $obj['FromUserName'];  //用户openid
+        $wxid = $obj['ToUserName'];   //微信号ID
 
 //        echo 'ToUserName:'.$obj->ToUserName;echo"</br>";//微信号
 //        echo 'FromUserName:'.$obj->FromUserName;echo"</br>";//用户openid
@@ -45,7 +46,7 @@ class WxController extends Controller
 //die;
 
 //        事件类型
-        $event = $obj->Event;
+        $event = $obj['Event'];
 
 //        扫码关注事件
         if($event=='subscribe') {
@@ -163,6 +164,20 @@ class WxController extends Controller
             echo "菜单创建成功";
         }
 
+    }
+
+    //消息素材
+    public function news($type, $offset, $count){
+        $url = 'https://api.weixin.qq.com/cgi-bin/media/upload?access_token='.$this->token().'&type=TYPE';
+        $data = '{"type":"'.$type.'","offset":"'.$offset.'","count":"'.$count.'"}';
+        $clinet = new Client();  //发送请求
+        $response = $clinet->request('POST',$url,[
+            'body' => $data
+        ]);
+
+        $res = $response->getBody();
+        $arr = json_decode($res,true);
+        return $arr;
     }
 
 }

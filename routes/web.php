@@ -26,5 +26,7 @@ Route::get('token', 'Weixin\WxController@token');
 Route::get('text', 'Weixin\WxController@text');
 Route::get('getuser', 'Weixin\WxController@getuser');
 Route::post('menu', 'Weixin\WxController@menu');
+Route::post('news', 'Weixin\WxController@news');
+
 
 
