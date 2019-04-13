@@ -36,13 +36,14 @@ class WxController extends Controller
         $obj = simplexml_load_string($content); //把xml转换成对象
 //        print_r($obj);
 //        获取相应的字段 (对象格式)
-        $openid = $obj['FromUserName'];  //用户openid
+//        $openid = $obj['FromUserName'];  //用户openid
+        $openid = $obj->FromUserName;  //用户openid
         $wxid = $obj['ToUserName'];   //微信号ID
 //                print_r($wxid);
 
-
         $msgtype = $obj->MsgType;
         $content = $obj->Content;
+        $media_id = $obj->MediaId;
 
 //        print_r($msgtype);
 //        echo 'ToUserName:'.$obj->ToUserName;echo"</br>";//微信号
@@ -87,19 +88,30 @@ class WxController extends Controller
         //获取消息素材
         if ($msgtype=='text'){
 
-            $userinfo = $this->getuser($openid);
+//            $userinfo = $this->getuser($openid);
             $info = [
                 'openid' => $openid,
-                'nickname' => $userinfo['nickname'],
+//                'nickname' => $userinfo['nickname'],
                 'content' => $content,
-                'headimgurl' => $userinfo['headimgurl'],
-                'subscribe_time' => $userinfo['subscribe_time'],
+//                'headimgurl' => $userinfo['headimgurl'],
+//                'subscribe_time' => $userinfo['subscribe_time'],
             ];
 
             $sql = DB::table('wx_text')->insertGetId($info);
+        }else if($msgtype=='image'){
+            $access=$this->token();
+            $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=$access&media_id=$media_id";
+            $time = time();
+            $str = file_get_contents($url);
+            file_put_contents("/wwwroot/1809ashop/image/$time.jpg",$str,FILE_APPEND);
+        }else if($msgtype=='voice'){
+            $access=$this->token();
+            $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=$access&media_id=$media_id";
+            $time = time();
+            $str = file_get_contents($url);
+            file_put_contents("/wwwroot/1809ashop/voice/$time.mp3",$str,FILE_APPEND);
+
         }
-
-
 
     }
 
@@ -111,10 +123,10 @@ class WxController extends Controller
         $key = 'access_token';
         $tok = Redis::get($key);
 //        var_dump($tok);die;
-//        if($tok){
-//            echo '有缓存';
-//        }else{
-//            echo '无缓存';
+        if($tok){
+            //echo '有缓存';
+        }else{
+            //echo '无缓存';
             $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'';
 
             $response = file_get_contents($url);
@@ -127,7 +139,7 @@ class WxController extends Controller
 
             $tok = $arr['access_token'];
 //            print_r($tok);
-//        }
+        }
 
         return $tok;
     }
@@ -164,9 +176,9 @@ class WxController extends Controller
                 ],
 
                 [
-                "type" => "click",
-                "name" => "点我，嘿嘿嘿",
-                "key" => "key_1"
+                    "type" => "click",
+                    "name" => "点我，嘿嘿嘿",
+                    "key" => "key_1"
                 ],
 
             ]
@@ -175,7 +187,7 @@ class WxController extends Controller
         $str = json_encode($arr,JSON_UNESCAPED_UNICODE);   //处理中文乱码
         $clinet = new Client();  //发送请求
         $response = $clinet->request('POST',$url,[
-                'body' => $str
+            'body' => $str
         ]);
 
         //处理响应回来
@@ -190,20 +202,6 @@ class WxController extends Controller
             echo "菜单创建成功";
         }
 
-    }
-
-    //消息素材
-    public function news($type, $offset, $count){
-        $url = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->token().'&media_id=MEDIA_ID';
-        $data = '{"type":"'.$type.'","offset":"'.$offset.'","count":"'.$count.'"}';
-        $clinet = new Client();  //发送请求
-        $response = $clinet->request('POST',$url,[
-            'body' => $data
-        ]);
-
-        $res = $response->getBody();
-        $arr = json_decode($res,true);
-        return $arr;
     }
 
 }
