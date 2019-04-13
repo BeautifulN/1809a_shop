@@ -34,11 +34,17 @@ class WxController extends Controller
         file_put_contents("logs/wx_event.log",$srt,FILE_APPEND);
 
         $obj = simplexml_load_string($content); //把xml转换成对象
-        print_r($obj);exit;
+//        print_r($obj);
 //        获取相应的字段 (对象格式)
         $openid = $obj['FromUserName'];  //用户openid
         $wxid = $obj['ToUserName'];   //微信号ID
+//                print_r($wxid);
 
+
+        $msgtype = $obj->MsgType;
+        $content = $obj->Content;
+
+//        print_r($msgtype);
 //        echo 'ToUserName:'.$obj->ToUserName;echo"</br>";//微信号
 //        echo 'FromUserName:'.$obj->FromUserName;echo"</br>";//用户openid
 //        echo 'CreateTime:'.$obj->CreateTime;echo"</br>";//推送时间
@@ -76,6 +82,22 @@ class WxController extends Controller
 
             }
         }
+
+        //获取消息素材
+        if ($msgtype=='text'){
+            $info = [
+                'openid' => $userinfo['openid'],
+                'nickname' => $userinfo['nickname'],
+                'content' => $content,
+                'headimgurl' => $userinfo['headimgurl'],
+                'subscribe_time' => $userinfo['subscribe_time'],
+            ];
+
+            $sql = DB::table('wx_text')->insertGetId($info);
+        }
+
+
+
     }
 
     /*
@@ -101,6 +123,7 @@ class WxController extends Controller
             Redis::expire($key,3600);
 
             $tok = $arr['access_token'];
+//            print_r($tok);
         }
 
         return $tok;
@@ -168,7 +191,7 @@ class WxController extends Controller
 
     //消息素材
     public function news($type, $offset, $count){
-        $url = 'https://api.weixin.qq.com/cgi-bin/media/upload?access_token='.$this->token().'&type=TYPE';
+        $url = 'https://api.weixin.qq.com/cgi-bin/media/get?access_token='.$this->token().'&media_id=MEDIA_ID';
         $data = '{"type":"'.$type.'","offset":"'.$offset.'","count":"'.$count.'"}';
         $clinet = new Client();  //发送请求
         $response = $clinet->request('POST',$url,[

@@ -22,6 +22,9 @@ Route::get('/info', function () {
 //微信
 Route::get('index', 'Weixin\WxController@index');
 Route::any('index', 'Weixin\WxController@wxEvent');
+Route::any('wxEvent', 'Weixin\WxController@wxEvent');
+
+
 Route::get('token', 'Weixin\WxController@token');
 Route::get('text', 'Weixin\WxController@text');
 Route::get('getuser', 'Weixin\WxController@getuser');
