@@ -59,6 +59,7 @@ class WxController extends Controller
             //根据openid判断用户是否已存在
             $user = DB::table('wx_address')->where(['openid' => $openid])->first();
 //            print_r($user);die;
+
             //如果用户之前关注过
             if ($user) {
                 echo '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$wxid.']]></FromUserName><CreateTime>' . time() . '</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'来了，老弟儿~' . $user->nickname . ']]></Content></xml>';
@@ -85,8 +86,10 @@ class WxController extends Controller
 
         //获取消息素材
         if ($msgtype=='text'){
+
+            $userinfo = $this->getuser($openid);
             $info = [
-                'openid' => $userinfo['openid'],
+                'openid' => $openid,
                 'nickname' => $userinfo['nickname'],
                 'content' => $content,
                 'headimgurl' => $userinfo['headimgurl'],

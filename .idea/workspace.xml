@@ -34,20 +34,20 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WxController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WxController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Weixin/WxController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="86" column="30" lean-forward="true" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
+            <state relative-caret-position="1311">
+              <caret line="98" column="52" lean-forward="false" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="52" />
               <folding>
                 <element signature="e#47#75#0#PHP" expanded="true" />
-                <element signature="e#4025#4122#0#PHP" expanded="false" />
+                <element signature="e#4064#4161#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="web.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="384">
@@ -77,8 +77,8 @@
         <option value="$PROJECT_DIR$/config/database.php" />
         <option value="&lt;1838b702-ebd8-47a7-93c2-540954d4ee52&gt;/config/database.php" />
         <option value="$PROJECT_DIR$/public/logs/wx_event.log" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Weixin/WxController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Weixin/WxController.php" />
       </list>
     </option>
   </component>
@@ -365,15 +365,15 @@
       <workItem from="1554896059151" duration="8414000" />
       <workItem from="1554949783142" duration="16305000" />
       <workItem from="1555030533776" duration="7932000" />
-      <workItem from="1555134180276" duration="2893000" />
+      <workItem from="1555134180276" duration="3234000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37426000" />
+    <option name="totallyTimeSpent" value="37767000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14658849" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -422,7 +422,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#47#75#0#PHP" expanded="true" />
-            <element signature="e#4025#4122#0#PHP" expanded="false" />
+            <element signature="e#4064#4161#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -486,22 +486,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Weixin/WxController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="86" column="30" lean-forward="true" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding>
-            <element signature="e#47#75#0#PHP" expanded="true" />
-            <element signature="e#4025#4122#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Weixin/WxController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1311">
+          <caret line="98" column="52" lean-forward="false" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="52" />
+          <folding>
+            <element signature="e#47#75#0#PHP" expanded="true" />
+            <element signature="e#4064#4161#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
