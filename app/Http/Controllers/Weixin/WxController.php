@@ -111,10 +111,10 @@ class WxController extends Controller
         $key = 'access_token';
         $tok = Redis::get($key);
 //        var_dump($tok);die;
-        if($tok){
-            echo '有缓存';
-        }else{
-            echo '无缓存';
+//        if($tok){
+//            echo '有缓存';
+//        }else{
+//            echo '无缓存';
             $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'';
 
             $response = file_get_contents($url);
@@ -127,7 +127,7 @@ class WxController extends Controller
 
             $tok = $arr['access_token'];
 //            print_r($tok);
-        }
+//        }
 
         return $tok;
     }

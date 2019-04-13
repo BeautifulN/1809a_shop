@@ -37,11 +37,11 @@
       <file leaf-file-name="WxController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Weixin/WxController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1311">
-              <caret line="98" column="52" lean-forward="false" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="52" />
+            <state relative-caret-position="39">
+              <caret line="108" column="25" lean-forward="false" selection-start-line="108" selection-start-column="20" selection-end-line="108" selection-end-column="25" />
               <folding>
                 <element signature="e#47#75#0#PHP" expanded="true" />
-                <element signature="e#4064#4161#0#PHP" expanded="false" />
+                <element signature="e#4074#4171#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -365,12 +365,12 @@
       <workItem from="1554896059151" duration="8414000" />
       <workItem from="1554949783142" duration="16305000" />
       <workItem from="1555030533776" duration="7932000" />
-      <workItem from="1555134180276" duration="3234000" />
+      <workItem from="1555134180276" duration="3453000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37767000" />
+    <option name="totallyTimeSpent" value="37986000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -422,7 +422,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#47#75#0#PHP" expanded="true" />
-            <element signature="e#4064#4161#0#PHP" expanded="false" />
+            <element signature="e#4074#4171#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -496,11 +496,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Weixin/WxController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="98" column="52" lean-forward="false" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="52" />
+        <state relative-caret-position="39">
+          <caret line="108" column="25" lean-forward="false" selection-start-line="108" selection-start-column="20" selection-end-line="108" selection-end-column="25" />
           <folding>
             <element signature="e#47#75#0#PHP" expanded="true" />
-            <element signature="e#4064#4161#0#PHP" expanded="false" />
+            <element signature="e#4074#4171#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
