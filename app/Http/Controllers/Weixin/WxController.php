@@ -86,7 +86,7 @@ class WxController extends Controller
         }
 
         //获取消息素材
-        if ($msgtype=='text'){
+        if ($msgtype=='text'){   //文本素材
 
 //            $userinfo = $this->getuser($openid);
             $info = [
@@ -98,13 +98,13 @@ class WxController extends Controller
             ];
 
             $sql = DB::table('wx_text')->insertGetId($info);
-        }else if($msgtype=='image'){
+        }else if($msgtype=='image'){   //图片素材
             $access=$this->token();
             $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=$access&media_id=$media_id";
             $time = time();
             $str = file_get_contents($url);
             file_put_contents("/wwwroot/1809ashop/image/$time.jpg",$str,FILE_APPEND);
-        }else if($msgtype=='voice'){
+        }else if($msgtype=='voice'){   //语音素材
             $access=$this->token();
             $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=$access&media_id=$media_id";
             $time = time();
