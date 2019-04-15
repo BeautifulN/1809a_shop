@@ -79,7 +79,7 @@ class WxController extends Controller
                     'subscribe_time' => $userinfo['subscribe_time'],
                 ];
 
-                $sql = DB::table('wx_address')->insertGetId($info);
+                $sql = DB::table('wx_address')->i53nsertGetId($info);
                 echo '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$wxid.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'千万人中，关注我；你真牛逼' . $info['nickname'] .']]></Content></xml>';
 
             }
@@ -171,7 +171,8 @@ class WxController extends Controller
         $arr = [
             'button' => [
 
-                ["type" => "view",
+                [
+                    "type" => "view",
                     "name" => "百度一下",
                     "url" => "http://www.baidu.com/"
                 ],
@@ -197,9 +198,7 @@ class WxController extends Controller
                         ]
                     ]
                 ]
-
             ]
-
         ];
         $str = json_encode($arr,JSON_UNESCAPED_UNICODE);   //处理中文乱码
         $clinet = new Client();  //发送请求
@@ -208,10 +207,9 @@ class WxController extends Controller
         ]);
 
         //处理响应回来
-        $res = $response->getBody();
-
-        $arr = json_decode($res,true);
-
+        //
+        //        $arr = json_decode($res,true);
+            print_r($arr);
         //判断错误信息
         if($arr['errcode']>0){
             echo "菜单创建失败";
