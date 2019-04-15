@@ -176,16 +176,16 @@ class WxController extends Controller
                     "url" => "http://www.baidu.com/"
                 ],
 
-                [ "name" => "呜哈哈哈",
+                [ "name" => "点我，嘿嘿嘿",
                     "sub_button"=>[
                         [
                             "type"=>"view",
-                            "name"=>"搜索",
-                            "url"=>"http://www.soso.com/"
+                            "name"=>"嘿羞网站",
+                            "url"=>"http://cpc.people.com.cn/"
                         ],
                         [
                             "type"=>"miniprogram",
-                            "name"=>"wxa",
+                            "name"=>"网警举报",
                             "url"=>"http://mp.weixin.qq.com",
                             "appid"=>"wx286b93c14bbf93aa",
                             "pagepath"=>"pages/lunar/index"
