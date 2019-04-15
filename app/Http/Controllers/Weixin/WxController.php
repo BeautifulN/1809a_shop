@@ -38,7 +38,7 @@ class WxController extends Controller
 //        获取相应的字段 (对象格式)
 //        $openid = $obj['FromUserName'];  //用户openid
         $openid = $obj->FromUserName;  //用户openid
-        $wxid = $obj['ToUserName'];   //微信号ID
+        $wxid = $obj->ToUserName;   //微信号ID
 //                print_r($wxid);
 
         $msgtype = $obj->MsgType;
@@ -53,7 +53,7 @@ class WxController extends Controller
 //die;
 
 //        事件类型
-        $event = $obj['Event'];
+        $event = $obj->Event;
 
 //        扫码关注事件
         if($event=='subscribe') {
@@ -104,6 +104,7 @@ class WxController extends Controller
             $time = time();
             $str = file_get_contents($url);
             file_put_contents("/wwwroot/1809ashop/image/$time.jpg",$str,FILE_APPEND);
+
         }else if($msgtype=='voice'){   //语音素材
             $access=$this->token();
             $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=$access&media_id=$media_id";
@@ -175,11 +176,27 @@ class WxController extends Controller
                     "url" => "http://www.baidu.com/"
                 ],
 
-                [
-                    "type" => "click",
-                    "name" => "点我，嘿嘿嘿",
-                    "key" => "key_1"
-                ],
+                [ "name" => "呜哈哈哈",
+                    "sub_button"=>[
+                        [
+                            "type"=>"view",
+                            "name"=>"搜索",
+                            "url"=>"http://www.soso.com/"
+                        ],
+                        [
+                            "type"=>"miniprogram",
+                            "name"=>"wxa",
+                            "url"=>"http://mp.weixin.qq.com",
+                            "appid"=>"wx286b93c14bbf93aa",
+                            "pagepath"=>"pages/lunar/index"
+                        ],
+                        [
+                            "type"=>"click",
+                            "name"=>"赞一下我们",
+                            "key"=>"wx1"
+                        ]
+                    ]
+                ]
 
             ]
 
