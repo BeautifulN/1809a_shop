@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Redis;
 
-use GuzzleHttp\Client;
+//use GuzzleHttp\Client;
 
 class WxController extends Controller
 {
@@ -88,6 +88,31 @@ class WxController extends Controller
         //获取消息素材
         if ($msgtype=='text'){   //文本素材
 
+            if(strpos($obj->Content,'+天气')){
+                $city = explode('+',$obj->Content)[0];
+                $url  = 'https://free-api.heweather.net/s6/weather/now?key=HE1904161044341977&location='.$city;
+                $response = file_get_contents($url);
+                $arr = json_decode($response,true);
+//                print_r($arr);
+                $fl = $arr['HeWeather6'][0]['now']['tmp'];   //温度
+                $cond_txt = $arr['HeWeather6'][0]['now']['cond_txt'];   //天气状况
+                $hum = $arr['HeWeather6'][0]['now']['hum'];   //相对湿度
+                $wind_sc = $arr['HeWeather6'][0]['now']['wind_sc'];   //风力
+                $wind_dir = $arr['HeWeather6'][0]['now']['wind_dir'];   //风向
+
+                $str = '温度:'.$fl."\n".'天气状况:'.$cond_txt."\n".'相对湿度:'.$hum."\n".'风力:'.$wind_sc."\n".'风向:'.$wind_dir."\n";
+                if ($arr['HeWeather6'][0]['now']['status'] == 'ok'){
+                    echo '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$wxid.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'请输入正确的天气：如（城市+天气）'.']]></Content></xml>';
+                }else{
+                    echo $xml = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
+                                    <FromUserName><![CDATA['.$wxid.']]></FromUserName>
+                                    <CreateTime>'.$time().'</CreateTime>
+                                    <MsgType><![CDATA[text]]></MsgType>
+                                    <Content><![CDATA['.$str.']]></Content>
+                                </xml>';
+                }
+            }
+
 //            $userinfo = $this->getuser($openid);
             $info = [
                 'openid' => $openid,
@@ -98,6 +123,7 @@ class WxController extends Controller
             ];
 
             $sql = DB::table('wx_text')->insertGetId($info);
+
         }else if($msgtype=='image'){   //图片素材
             $access=$this->token();
             $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=$access&media_id=$media_id";
@@ -105,6 +131,8 @@ class WxController extends Controller
             $str = file_get_contents($url);
             file_put_contents("/wwwroot/1809ashop/image/$time.jpg",$str,FILE_APPEND);
 
+            $arr = [];
+//            $sql = DB::table('wx_text')->insertGetId($arr);
         }else if($msgtype=='voice'){   //语音素材
             $access=$this->token();
             $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=$access&media_id=$media_id";
@@ -181,7 +209,7 @@ class WxController extends Controller
                     "sub_button"=>[
                         [
                             "type"=>"view",
-                            "name"=>"嘿羞网站",
+                            "name"=>"网站",
                             "url"=>"http://cpc.people.com.cn/"
                         ],
                         [
@@ -207,9 +235,10 @@ class WxController extends Controller
         ]);
 
         //处理响应回来
+        $res = $response->getBody();
         //
-        //        $arr = json_decode($res,true);
-            print_r($arr);
+        $arr = json_decode($res,true);
+//            print_r($arr);
         //判断错误信息
         if($arr['errcode']>0){
             echo "菜单创建失败";
