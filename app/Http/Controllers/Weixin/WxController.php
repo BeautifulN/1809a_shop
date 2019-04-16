@@ -88,9 +88,9 @@ class WxController extends Controller
         //获取消息素材
         if ($msgtype=='text'){   //文本素材
 
-            if(strpos($obj->Content,'+天气')){   //天气接口
+            if(strpos($obj->Content,'+天气')){
                 $city = explode('+',$obj->Content)[0];
-                $url  = 'https://free-api.heweather.net/s6/weather/now?key=HE1904161044341977&location='.$city;
+                $url  = 'https://free-api.heweather.net/s6/weather/now?key=HE1904161044341977&location='.$city;  //天气接口
                 $response = file_get_contents($url);
                 $arr = json_decode($response,true);
 //                print_r($arr);
