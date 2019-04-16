@@ -106,7 +106,7 @@ class WxController extends Controller
                     $hum = $arr['HeWeather6'][0]['now']['hum'];   //相对湿度
                     $wind_sc = $arr['HeWeather6'][0]['now']['wind_sc'];   //风力
                     $wind_dir = $arr['HeWeather6'][0]['now']['wind_dir'];   //风向
-l
+
                     $str = '温度:'.$fl."\n".'天气状况:'.$cond_txt."\n".'相对湿度:'.$hum."\n".'风力:'.$wind_sc."\n".'风向:'.$wind_dir."\n";
                     echo $xml = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
                                     <FromUserName><![CDATA['.$wxid.']]></FromUserName>
@@ -157,9 +157,9 @@ l
         $key = 'access_token';
         $tok = Redis::get($key);
 //        var_dump($tok);die;
-//        if($tok){
-//            //echo '有缓存';
-//        }else{
+        if($tok){
+            //echo '有缓存';
+        }else{
             //echo '无缓存';
             $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'';
 
@@ -172,8 +172,8 @@ l
             Redis::expire($key,3600);
 
             $tok = $arr['access_token'];
-            print_r($tok);
-//        }
+//            print_r($tok);
+        }
 
         return $tok;
     }
