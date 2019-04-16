@@ -199,6 +199,7 @@ class WxController extends Controller
     public function menu(){
 //        接口
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$this->token();
+//        print_r($url);exit;
 
 //        菜单数据内容
         $arr = [
@@ -210,7 +211,7 @@ class WxController extends Controller
                     "url" => "http://www.baidu.com/"
                 ],
 
-                [ "name" => "点我，嘿嘿嘿",
+                [ "name" => "点我嘿嘿嘿",
                     "sub_button"=>[
                         [
                             "type"=>"view",
@@ -234,11 +235,12 @@ class WxController extends Controller
             ]
         ];
         $str = json_encode($arr,JSON_UNESCAPED_UNICODE);   //处理中文乱码
+
         $clinet = new Client();  //发送请求
+
         $response = $clinet->request('POST',$url,[
             'body' => $str
         ]);
-
         //处理响应回来
         $res = $response->getBody();
         //
