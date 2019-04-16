@@ -31,5 +31,8 @@ Route::get('getuser', 'Weixin\WxController@getuser');
 Route::post('menu', 'Weixin\WxController@menu');
 Route::post('news', 'Weixin\WxController@news');
 
+Route::post('sendtext', 'Weixin\WxController@sendtext');
+Route::get('send', 'Weixin\WxController@send');
+
 
 

@@ -94,11 +94,8 @@ class WxController extends Controller
                 $arr = json_decode($response,true);
 //                print_r($arr);
 
-
                 if ($arr['HeWeather6'][0]['status'] != 'ok'){   //状态码status
-
                     echo '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$wxid.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'请输入正确的天气：如（北京+天气）'.']]></Content></xml>';
-
                 }else{
                     $fl = $arr['HeWeather6'][0]['now']['tmp'];   //温度
                     $cond_txt = $arr['HeWeather6'][0]['now']['cond_txt'];   //天气状况
@@ -114,18 +111,13 @@ class WxController extends Controller
                                     <Content><![CDATA['.$str.']]></Content>
                                 </xml>';
                 }
-
             }
-
-//            $userinfo = $this->getuser($openid);
             $info = [
                 'openid' => $openid,
 //                'nickname' => $nickname,
                 'content' => $content,
 //                'headimgurl' => $userinfo['headimgurl'],
-//                'subscribe_time' => $userinfo['subscribe_time'],
             ];
-
             $sql = DB::table('wx_text')->insertGetId($info);
 
         }else if($msgtype=='image'){   //图片素材
@@ -157,7 +149,6 @@ class WxController extends Controller
                 'voice' => $voice,
             ];
             $sql = DB::table('wx_voice')->insertGetId($arr);
-
         }
 
     }
@@ -268,4 +259,37 @@ class WxController extends Controller
 
     }
 
+    //
+    public function sendtext($openid,$content){
+        //消息群发
+//        echo $content;
+        $access = $this->token();
+        $msg = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=$access";
+        $arr = [
+            "touser" => $openid,
+                "text"=>[
+                "content"=>$content,
+                ],
+            "msgtype"=>"text",
+        ];
+        $str = json_encode($arr,JSON_UNESCAPED_UNICODE);
+        $client = new Client();  //发送请求
+        $response = $client->request('POST',$msg,[
+            'body' => $str
+        ]);
+        echo $response->getBody();
+
+    }
+
+
+
+    //消息群发(2) (查询数据库  根据openid群发)
+    public function send(){
+        $arr = DB::table('wx_address')->where(['sub_status'=>1])->get()->toArray(); //查询关注的用户
+        $openid = array_column($arr,'openid');
+//        print_r($openid);exit;
+        $content = "嘿嘿";
+        $response = $this->sendtext($openid,$content);
+//        return $response;
+    }
 }
