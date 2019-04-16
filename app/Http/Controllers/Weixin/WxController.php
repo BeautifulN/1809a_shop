@@ -104,12 +104,12 @@ class WxController extends Controller
                 if ($arr['HeWeather6'][0]['status'] == 'ok'){
                     echo $xml = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
                                     <FromUserName><![CDATA['.$wxid.']]></FromUserName>
-                                    <CreateTime>'.$time().'</CreateTime>
+                                    <CreateTime>'.$time.'</CreateTime>
                                     <MsgType><![CDATA[text]]></MsgType>
                                     <Content><![CDATA['.$str.']]></Content>
                                 </xml>';
                 }else{
-                    echo '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$wxid.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'请输入正确的天气：如（城市+天气）'.']]></Content></xml>';
+                    echo '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$wxid.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'请输入正确的天气：如（北京+天气）'.']]></Content></xml>';
 
                 }
 
