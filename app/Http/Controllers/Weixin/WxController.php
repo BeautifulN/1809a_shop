@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Redis;
 
-//use GuzzleHttp\Client;
+use GuzzleHttp\Client;
 
 class WxController extends Controller
 {
