@@ -88,7 +88,7 @@ class WxController extends Controller
         //获取消息素材
         if ($msgtype=='text'){   //文本素材
 
-            if(strpos($obj->Content,'+天气')){
+            if(strpos($obj->Content,'+天气')){   //天气接口
                 $city = explode('+',$obj->Content)[0];
                 $url  = 'https://free-api.heweather.net/s6/weather/now?key=HE1904161044341977&location='.$city;
                 $response = file_get_contents($url);
@@ -101,7 +101,8 @@ class WxController extends Controller
                 $wind_dir = $arr['HeWeather6'][0]['now']['wind_dir'];   //风向
 
                 $str = '温度:'.$fl."\n".'天气状况:'.$cond_txt."\n".'相对湿度:'.$hum."\n".'风力:'.$wind_sc."\n".'风向:'.$wind_dir."\n";
-                if ($arr['HeWeather6'][0]['status'] == 'ok'){
+
+                if ($arr['HeWeather6'][0]['status'] == 'ok'){   //状态码status
                     echo $xml = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
                                     <FromUserName><![CDATA['.$wxid.']]></FromUserName>
                                     <CreateTime>'.$time.'</CreateTime>
