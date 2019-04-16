@@ -40,7 +40,7 @@ class WxController extends Controller
         $openid = $obj->FromUserName;  //用户openid
         $wxid = $obj->ToUserName;   //微信号ID
 //                print_r($wxid);
-
+        $createtime = $obj->CreateTime;
         $msgtype = $obj->MsgType;
         $content = $obj->Content;
         $media_id = $obj->MediaId;
@@ -51,7 +51,6 @@ class WxController extends Controller
 //        echo 'CreateTime:'.$obj->CreateTime;echo"</br>";//推送时间
 //        echo 'Event:'.$obj->Event;echo"</br>";//消息类型
 //die;
-
 //        事件类型
         $event = $obj->Event;
 
@@ -121,7 +120,7 @@ class WxController extends Controller
 //            $userinfo = $this->getuser($openid);
             $info = [
                 'openid' => $openid,
-//                'nickname' => $userinfo['nickname'],
+//                'nickname' => $nickname,
                 'content' => $content,
 //                'headimgurl' => $userinfo['headimgurl'],
 //                'subscribe_time' => $userinfo['subscribe_time'],
@@ -135,15 +134,29 @@ class WxController extends Controller
             $time = time();
             $str = file_get_contents($url);
             file_put_contents("/wwwroot/1809ashop/image/$time.jpg",$str,FILE_APPEND);
-
-            $arr = [];
-//            $sql = DB::table('wx_text')->insertGetId($arr);
+            $image = '/wwwroot/1809ashop/image/'.$time.'.jpg';
+//                print_r($image);exit;
+            $arr = [
+                'openid' => $openid,
+                'createtime' => $createtime,
+                'image' => $image,
+            ];
+            $sql = DB::table('wx_image')->insertGetId($arr);
         }else if($msgtype=='voice'){   //语音素材
             $access=$this->token();
             $url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=$access&media_id=$media_id";
             $time = time();
             $str = file_get_contents($url);
             file_put_contents("/wwwroot/1809ashop/voice/$time.mp3",$str,FILE_APPEND);
+
+            $voice = '/wwwroot/1809ashop/voice/'.$time.'.mp3';
+//                print_r($image);exit;
+            $arr = [
+                'openid' => $openid,
+                'createtime' => $createtime,
+                'voice' => $voice,
+            ];
+            $sql = DB::table('wx_voice')->insertGetId($arr);
 
         }
 
