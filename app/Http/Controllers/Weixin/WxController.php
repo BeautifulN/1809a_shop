@@ -105,7 +105,7 @@ class WxController extends Controller
                 if ($arr['HeWeather6'][0]['status'] == 'ok'){   //状态码status
                     echo $xml = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
                                     <FromUserName><![CDATA['.$wxid.']]></FromUserName>
-                                    <CreateTime>'.$time.'</CreateTime>
+                                    <CreateTime>'.time().'</CreateTime>
                                     <MsgType><![CDATA[text]]></MsgType>
                                     <Content><![CDATA['.$str.']]></Content>
                                 </xml>';
