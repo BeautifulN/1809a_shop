@@ -94,18 +94,20 @@ class WxController extends Controller
                 $response = file_get_contents($url);
                 $arr = json_decode($response,true);
 //                print_r($arr);
-                $fl = $arr['HeWeather6'][0]['now']['tmp'];   //温度
-                $cond_txt = $arr['HeWeather6'][0]['now']['cond_txt'];   //天气状况
-                $hum = $arr['HeWeather6'][0]['now']['hum'];   //相对湿度
-                $wind_sc = $arr['HeWeather6'][0]['now']['wind_sc'];   //风力
-                $wind_dir = $arr['HeWeather6'][0]['now']['wind_dir'];   //风向
 
-                $str = '温度:'.$fl."\n".'天气状况:'.$cond_txt."\n".'相对湿度:'.$hum."\n".'风力:'.$wind_sc."\n".'风向:'.$wind_dir."\n";
 
                 if ($arr['HeWeather6'][0]['status'] != 'ok'){   //状态码status
+
                     echo '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$wxid.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['.'请输入正确的天气：如（北京+天气）'.']]></Content></xml>';
 
                 }else{
+                    $fl = $arr['HeWeather6'][0]['now']['tmp'];   //温度
+                    $cond_txt = $arr['HeWeather6'][0]['now']['cond_txt'];   //天气状况
+                    $hum = $arr['HeWeather6'][0]['now']['hum'];   //相对湿度
+                    $wind_sc = $arr['HeWeather6'][0]['now']['wind_sc'];   //风力
+                    $wind_dir = $arr['HeWeather6'][0]['now']['wind_dir'];   //风向
+
+                    $str = '温度:'.$fl."\n".'天气状况:'.$cond_txt."\n".'相对湿度:'.$hum."\n".'风力:'.$wind_sc."\n".'风向:'.$wind_dir."\n";
                     echo $xml = '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName>
                                     <FromUserName><![CDATA['.$wxid.']]></FromUserName>
                                     <CreateTime>'.time().'</CreateTime>
