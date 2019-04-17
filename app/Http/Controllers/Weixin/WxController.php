@@ -281,15 +281,14 @@ class WxController extends Controller
 
     }
 
-
-
-    //消息群发(2) (查询数据库  根据openid群发)
+    //消息群发 (查询数据库  根据openid群发)
     public function send(){
         $arr = DB::table('wx_address')->where(['sub_status'=>1])->get()->toArray(); //查询关注的用户
         $openid = array_column($arr,'openid');
 //        print_r($openid);exit;
-        $content = "嘿嘿";
+        $content = "嘿嘿嘿嘿";
         $response = $this->sendtext($openid,$content);
 //        return $response;
     }
+    
 }
