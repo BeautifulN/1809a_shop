@@ -290,5 +290,5 @@ class WxController extends Controller
         $response = $this->sendtext($openid,$content);
 //        return $response;
     }
-    
+
 }

@@ -35,4 +35,11 @@ Route::post('sendtext', 'Weixin\WxController@sendtext');
 Route::get('send', 'Weixin\WxController@send');
 
 
+//微信支付
+Route::get('test','Weixin\WxPayController@test');           //支付
+Route::post('notify','Weixin\WxPayController@notify');       //微信支付回调地址
+
+
+
+
 
