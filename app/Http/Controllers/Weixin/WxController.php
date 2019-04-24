@@ -112,24 +112,17 @@ class WxController extends Controller
                                     <Content><![CDATA['.$str.']]></Content>
                                 </xml>';
                 }
-            }
-
-            //回复图文信息
-            $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-            if (!empty($postStr)){
-                libxml_disable_entity_loader(true);//防止文件泄漏
-//                $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+            }else if ($obj->Content == '图文'){   //回复图文信息
                 $openid = $openid;
                 $wxid = $wxid;
                 $keyword = $content;
                 $time = time();
-                if( $keyword == '图文' ) {
-                    $itemTpl = "<xml>
-                    <ToUserName><![CDATA[%s]]></ToUserName>
-                    <FromUserName><![CDATA[%s]]></FromUserName>
-                    <CreateTime>%s</CreateTime>
+                echo $itemTpl = "<xml>
+                    <ToUserName><![CDATA['.$openid.']]></ToUserName>
+                    <FromUserName><![CDATA['.$wxid.']]></FromUserName>
+                    <CreateTime>'.time().'</CreateTime>
                     <MsgType><![CDATA[news]]></MsgType>
-                    <ArticleCount>2</ArticleCount>
+                    <ArticleCount>1</ArticleCount>
                     <Articles>
                         <item>
                             <Title><![CDATA[哈哈哈哈哈]]></Title> 
@@ -137,24 +130,51 @@ class WxController extends Controller
                             <PicUrl><![CDATA[http://yuzqyp.natappfree.cc/images/1.jpg]]></PicUrl>
                             <Url><![CDATA[https://www.baidu.com/]]></Url>
                         </item>
-                        <item>
-                            <Title><![CDATA[嘿嘿嘿嘿嘿]]></Title>
-                            <Description><![CDATA[不会的就要百度？，网址：https://www.baidu.com/]]></Description>
-                            <PicUrl><![CDATA[http://yuzqyp.natappfree.cc/images/1.jpg]]></PicUrl>
-                            <Url><![CDATA[https://www.baidu.com/]]></Url>
-                        </item>
                     </Articles>
                     </xml>";
-                    //%s替换成变量
-                    $result = sprintf($itemTpl, $openid, $wxid, $time);
-                    echo $result;
-                }
-
-            }else{
-                echo "失败";
-                exit;
-
             }
+
+            //回复图文信息
+//            $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+//            if(!empty($postStr)){
+//                libxml_disable_entity_loader(true);//防止文件泄漏
+////                $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+//                $openid = $openid;
+//                $wxid = $wxid;
+//                $keyword = $content;
+//                $time = time();
+//                if( $keyword == '图文' ) {
+//                    $itemTpl = "<xml>
+//                    <ToUserName><![CDATA[%s]]></ToUserName>
+//                    <FromUserName><![CDATA[%s]]></FromUserName>
+//                    <CreateTime>%s</CreateTime>
+//                    <MsgType><![CDATA[news]]></MsgType>
+//                    <ArticleCount>2</ArticleCount>
+//                    <Articles>
+//                        <item>
+//                            <Title><![CDATA[哈哈哈哈哈]]></Title>
+//                            <Description><![CDATA[百度么？，网址：https://www.baidu.com/]]></Description>
+//                            <PicUrl><![CDATA[http://yuzqyp.natappfree.cc/images/1.jpg]]></PicUrl>
+//                            <Url><![CDATA[https://www.baidu.com/]]></Url>
+//                        </item>
+//                        <item>
+//                            <Title><![CDATA[嘿嘿嘿嘿嘿]]></Title>
+//                            <Description><![CDATA[不会的就要百度？，网址：https://www.baidu.com/]]></Description>
+//                            <PicUrl><![CDATA[http://yuzqyp.natappfree.cc/images/1.jpg]]></PicUrl>
+//                            <Url><![CDATA[https://www.baidu.com/]]></Url>
+//                        </item>
+//                    </Articles>
+//                    </xml>";
+//                    //%s替换成变量
+//                    $result = sprintf($itemTpl, $openid, $wxid, $time);
+//                    echo $result;
+//                }
+//
+//            }else{
+//                echo "失败";
+//                exit;
+//
+//            }
 
 
             $info = [
