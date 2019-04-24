@@ -116,8 +116,8 @@ class WxController extends Controller
                 $openid = $openid;
                 $wxid = $wxid;
                 $keyword = $content;
-                $time = time();
-                echo $itemTpl = "<xml>
+//                $time = time();
+                echo $itemTpl = '<xml>
                     <ToUserName><![CDATA['.$openid.']]></ToUserName>
                     <FromUserName><![CDATA['.$wxid.']]></FromUserName>
                     <CreateTime>'.time().'</CreateTime>
@@ -131,7 +131,7 @@ class WxController extends Controller
                             <Url><![CDATA[https://www.baidu.com/]]></Url>
                         </item>
                     </Articles>
-                    </xml>";
+                    </xml>';
             }
 
             //回复图文信息
