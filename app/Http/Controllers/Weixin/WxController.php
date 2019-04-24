@@ -122,11 +122,17 @@ class WxController extends Controller
                     <FromUserName><![CDATA['.$wxid.']]></FromUserName>
                     <CreateTime>'.time().'</CreateTime>
                     <MsgType><![CDATA[news]]></MsgType>
-                    <ArticleCount>1</ArticleCount>
+                    <ArticleCount>2</ArticleCount>
                     <Articles>
                         <item>
                             <Title><![CDATA[哈哈哈哈哈]]></Title> 
                             <Description><![CDATA[百度么？，网址：https://www.baidu.com/]]></Description>
+                            <PicUrl><![CDATA[http://yuzqyp.natappfree.cc/images/1.jpg]]></PicUrl>
+                            <Url><![CDATA[https://www.baidu.com/]]></Url>
+                        </item>
+                        <item>
+                            <Title><![CDATA[嘿嘿嘿嘿嘿]]></Title>
+                            <Description><![CDATA[不会的就要百度？，网址：https://www.baidu.com/]]></Description>
                             <PicUrl><![CDATA[http://yuzqyp.natappfree.cc/images/1.jpg]]></PicUrl>
                             <Url><![CDATA[https://www.baidu.com/]]></Url>
                         </item>
