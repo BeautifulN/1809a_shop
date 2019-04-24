@@ -113,14 +113,10 @@ class WxController extends Controller
                                 </xml>';
                 }
             }else if ($obj->Content == '图文'){   //回复图文信息
-                $arr = DB::table('goods')->first();
                 $title = "最新商品";
-//                print_r($arr);
-                $goods_name = $arr['goods_name'];
-
                 $openid = $openid;
                 $wxid = $wxid;
-                $keyword = $content;
+//                $keyword = $content;
 //                $time = time();
                 echo $itemTpl = '<xml>
                     <ToUserName><![CDATA['.$openid.']]></ToUserName>
@@ -131,7 +127,7 @@ class WxController extends Controller
                     <Articles>
                         <item>
                             <Title><![CDATA['.$title.']]></Title> 
-                            <Description><![CDATA['.$goods_name.'嘿羞]]></Description>
+                            <Description><![CDATA[猜猜是什么？！]]></Description>
                             <PicUrl><![CDATA[http://1809lvmingjin.comcto.com/images/a1.jpg]]></PicUrl>
                             <Url><![CDATA[http://dangjian.people.com.cn/]]></Url>
                         </item>
