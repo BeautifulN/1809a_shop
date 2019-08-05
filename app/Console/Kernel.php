@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->command('echo:weixin')//weixin.php中的 $signature name
+                 ->everyMinute();//每分钟执行一次
     }
 
     /**
